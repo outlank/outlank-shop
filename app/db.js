@@ -71,11 +71,11 @@ function defineModel(name, attributes) {
   // }, '  '));
   return sequelize.define(name, attrs, {
     tableName: name,
-    timestamps: false
+    timestamps: true
   })
 }
 
-const TYPES = ['STRING', 'INTEGER', 'BIGINT', 'TEXT', 'DOUBLE', 'DATE', 'DATEONLY', 'BOOLEAN']
+const TYPES = ['STRING', 'INTEGER', 'BIGINT', 'TEXT', 'DOUBLE', 'DATE', 'DATEONLY', 'BOOLEAN', 'BLOB']
 
 var exp = {
   defineModel: defineModel,

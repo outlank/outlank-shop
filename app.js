@@ -18,7 +18,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/frontend/build/static'))
+app.use(require('koa-static')(__dirname + '/frontend/build'))
 
 app.use(views(__dirname + '/frontend/build', {
   extension: 'html'
