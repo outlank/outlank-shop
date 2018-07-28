@@ -1,6 +1,6 @@
 var config = {
   dialect: 'mysql',
-  database: 'yinhe_app_monitor',
+  database: '',
   username: 'root',
   password: '123456',
   host: 'localhost',
