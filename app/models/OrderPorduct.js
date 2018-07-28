@@ -11,7 +11,7 @@ module.exports = db.defineModel('order_product', {
   productId: { // 商品ID
     type: db.STRING,
     references: {
-      model: 'product',
+      model: 'product_sku',
       key: 'id'
     }
   },

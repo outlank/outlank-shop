@@ -10,8 +10,12 @@ let jsFiles = files.filter((f) => {
 
 module.exports = {}
 
+let sortArray = ['Customer.js', 'ProductSku.js', 'ProductSpu.js', 'Vendor.js']
+
+jsFiles = jsFiles.sort((a, b) => sortArray.indexOf(b) - sortArray.indexOf(a))
+
 for (let f of jsFiles) {
-  // console.log(`import model from file ${f}...`);
+  // console.log(`import model from file ${f}...`)
   let name = f.substring(0, f.length - 3)
   module.exports[name] = require(path.join(__dirname, '/models/' + f))
 }
