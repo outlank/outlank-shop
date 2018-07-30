@@ -10,7 +10,7 @@ let jsFiles = files.filter((f) => {
 
 module.exports = {}
 
-let sortArray = ['Customer.js', 'ProductSku.js', 'ProductSpu.js', 'Vendor.js']
+let sortArray = ['Order.js', 'Customer.js', 'ProductSku.js', 'ProductSpu.js', 'Vendor.js']
 
 jsFiles = jsFiles.sort((a, b) => sortArray.indexOf(b) - sortArray.indexOf(a))
 

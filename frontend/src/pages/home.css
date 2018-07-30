@@ -1,0 +1,21 @@
+.home-list .am-list-body {
+  background-color: transparent; }
+  .home-list .am-list-body:before {
+    background-color: transparent !important; }
+.home-list .am-card {
+  border: none; }
+  .home-list .am-card:before {
+    border: none !important; }
+  .home-list .am-card-body {
+    border: none; }
+    .home-list .am-card-body:before {
+      height: 0 !important; }
+    .home-list .am-card-body .img {
+      margin: -15px -15px 0; }
+      .home-list .am-card-body .img img {
+        border-radius: 5px 5px 0 0;
+        width: 100%; }
+  .home-list .am-card .am-card-footer {
+    font-size: 80%; }
+
+/*# sourceMappingURL=home.css.map */

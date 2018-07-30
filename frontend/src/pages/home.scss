@@ -1,0 +1,30 @@
+.home-list {
+  .am-list-body {
+    background-color: transparent;
+    &:before {
+      background-color: transparent!important;
+    }
+  }
+  .am-card {
+    &:before {
+      border: none !important;
+    }
+    border: none;
+    &-body {
+      &:before {
+        height: 0 !important;
+      }
+      border: none;
+      .img {
+        margin: -15px -15px 0;
+        img {
+          border-radius: 5px 5px 0 0;
+          width: 100%;
+        }
+      }
+    }
+    .am-card-footer {
+      font-size: 80%;
+    }
+  }
+}

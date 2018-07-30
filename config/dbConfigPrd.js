@@ -1,6 +1,6 @@
 var config = {
   dialect: 'mysql',
-  database: '',
+  database: 'outlank_shop',
   username: 'root',
   password: '123456',
   host: 'localhost',
