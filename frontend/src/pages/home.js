@@ -1,24 +1,28 @@
 import React from 'react'
-import { Flex, WhiteSpace, WingBlank, ListView, Card } from 'antd-mobile'
+import { Flex, WingBlank, ListView, Card } from 'antd-mobile'
+import { Link } from 'react-router-dom'
 import './home.css'
+import TabBar from '../layout/tabBar'
 import { Random } from 'mockjs'
 
 const data = []
-for (let i = 0; i < 100; i++) data.push({
-  image: Random.image('200x200', '#a9a9a9', '0.0'),
-  name: Random.ctitle(),
-  describe: Random.csentence,
-  price: Random.float(0, 9999, 2, 2),
-  sales: Random.natural(0, 9999),
-  id: Random.guid()
-})
-const num_rows = data.length
+for (let i = 0; i < 10; i++) {
+  data.push({
+    image: Random.image('200x200', '#a9a9a9', 'test' + i),
+    name: Random.ctitle(),
+    describe: Random.csentence(),
+    price: Random.float(0, 9999, 2, 2),
+    sales: Random.natural(0, 9999),
+    id: Random.guid()
+  })
+}
+const numRows = data.length
 let pageIndex = 0
 
 function getData (pIndex = 0) {
   const dataBlob = {}
-  for (let i = 0; i < num_rows; i++) {
-    const ii = (pIndex * num_rows) + i
+  for (let i = 0; i < numRows; i++) {
+    const ii = (pIndex * numRows) + i
     dataBlob[`${ii}`] = `row - ${ii}`
   }
   return dataBlob
@@ -59,88 +63,79 @@ class home extends React.Component {
   //   }
   // }
 
-  onEndReached = (event) => {
-    // load new data
-    // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (this.state.isLoading && !this.state.hasMore) {
-      return
-    }
-    console.log('reach end', event)
-    this.setState({ isLoading: true })
-    setTimeout(() => {
-      this.rData = { ...this.rData, ...getData(++pageIndex) }
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false,
-      })
-    }, 1000)
-  }
-
   render () {
+    const onEndReached = (event) => {
+      // load new data
+      // hasMore: from backend data, indicates whether it is the last page, here is false
+      // if (this.state.isLoading && !this.state.hasMore) {
+      //   return
+      // }
+      console.log('reach end', event)
+      this.setState({ isLoading: true })
+      setTimeout(() => {
+        this.rData = { ...this.rData, ...getData(++pageIndex) }
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          isLoading: false
+        })
+      }, 1000)
+    }
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
-        style={{ height: 8, }}
+        style={{ height: 8 }}
       />
     )
-    let index = data.length - 1
+    let index = 0
     const row = (rowData, sectionID, rowID) => {
-      if (index < 0) {
-        index = data.length - 1
+      if (index >= data.length) {
+        index = 0
       }
-      const obj1 = data[index--]
-      const obj2 = data[index--]
+      const obj = [data[index++], data[index++]]
       return (
-        <Flex>
-          <Flex.Item>
-            <Card>
-              <Card.Body>
-                <div className='img'>
-                  <img src={Random.image('200x200', '#a9a9a9', 'test')} />
-                </div>
-                <div className='name'>商品名称</div>
-                <div className='describe'>商品描述</div>
-              </Card.Body>
-              <Card.Footer content='价格： 100' extra={<div>销量：50</div>} />
-            </Card>
-          </Flex.Item>
-          <Flex.Item>
-            <Card>
-              <Card.Body>
-                <div className='img'>
-                  <img src={Random.image('200x200', '#a9a9a9', 'test')} />
-                </div>
-                <div className='name'>商品名称</div>
-                <div className='describe'>商品描述</div>
-              </Card.Body>
-              <Card.Footer content='价格： 100' extra={<div>销量：50</div>} />
-            </Card>
-          </Flex.Item>
+        <Flex key={rowID}>
+          {obj.map(e => (
+            <Flex.Item key={rowID + e.id}>
+              <Link to={'/product/' + e.id}>
+                <Card>
+                  <Card.Body>
+                    <div className='img'>
+                      <img src={e.image} />
+                    </div>
+                    <div className='name'>{e.name}</div>
+                    <div className='describe'>{e.describe}</div>
+                  </Card.Body>
+                  <Card.Footer content={'价格：' + e.price} extra={<div>销量：{e.sales}</div>} />
+                </Card>
+              </Link>
+            </Flex.Item>
+          ))}
         </Flex>
       )
     }
     return (
-      <WingBlank>
-        <h1>home page</h1>
-        <ListView
-          ref={el => this.lv = el}
-          dataSource={this.state.dataSource}
-          renderHeader={() => <span>header</span>}
-          renderFooter={() => (
-            <div style={{ padding: 30, textAlign: 'center' }}>{this.state.isLoading ? 'Loading...' : 'Loaded'}</div>)}
-          renderRow={row}
-          renderSeparator={separator}
-          className='home-list'
-          pageSize={4}
-          useBodyScroll
-          onScroll={() => { console.log('scroll') }}
-          scrollRenderAheadDistance={500}
-          onEndReached={this.onEndReached}
-          onEndReachedThreshold={10}
-        />
-
-        <WhiteSpace size='lg' />
-      </WingBlank>
+      <div>
+        <WingBlank>
+          <h1>home page</h1>
+          <ListView
+            ref={el => this.lv = el}
+            dataSource={this.state.dataSource}
+            renderHeader={() => <span>header</span>}
+            renderFooter={() => (
+              <div style={{ padding: 30, textAlign: 'center' }}>{this.state.isLoading ? 'Loading...' : 'Loaded'}</div>)}
+            renderRow={row}
+            renderSeparator={separator}
+            className='home-list'
+            pageSize={4}
+            useBodyScroll
+            onScroll={() => { console.log('scroll') }}
+            scrollRenderAheadDistance={500}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={10}
+          />
+        </WingBlank>
+        <TabBar match={this.props.match} />
+      </div>
     )
   }
 }

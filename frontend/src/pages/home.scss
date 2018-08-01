@@ -22,9 +22,20 @@
           width: 100%;
         }
       }
+      .name {
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .describe {
+        font-size: 90%;
+        flood-color: #222222;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
     .am-card-footer {
-      font-size: 80%;
+      font-size: 70%;
     }
   }
 }

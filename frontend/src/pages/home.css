@@ -15,7 +15,16 @@
       .home-list .am-card-body .img img {
         border-radius: 5px 5px 0 0;
         width: 100%; }
+    .home-list .am-card-body .name {
+      white-space: nowrap;
+      overflow: hidden; }
+    .home-list .am-card-body .describe {
+      font-size: 90%;
+      flood-color: #222222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
   .home-list .am-card .am-card-footer {
-    font-size: 80%; }
+    font-size: 70%; }
 
 /*# sourceMappingURL=home.css.map */
