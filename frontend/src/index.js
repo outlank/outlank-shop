@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import Home from './pages/home'
+import Product from './pages/product'
 
 ReactDOM.render(
   (
@@ -14,6 +15,11 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/product/:id' component={Product} />
+          <Route exact path='/class' component={Home} />
+          <Route exact path='/cart' component={Home} />
+          <Route exact path='/user' component={Home} />
+          <Route path='*' render={() => '404 not found'} />
         </Switch>
       </BrowserRouter>
     </Provider>

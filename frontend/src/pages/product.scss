@@ -1,0 +1,18 @@
+.product-page {
+  height: 100vh;
+  .product-drawer {
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    .am-drawer-sidebar {
+      height: 500px;
+      background-color: #fff;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      .am-list {
+        width: 300px;
+        padding: 0;
+      }
+    }
+  }
+}
