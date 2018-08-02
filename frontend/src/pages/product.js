@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, List, Button, WhiteSpace, WingBlank } from 'antd-mobile'
+import { Modal, List, Button, TabBar } from 'antd-mobile'
 import './product.css'
 
 class page extends React.Component {
@@ -11,42 +11,43 @@ class page extends React.Component {
   }
 
   render () {
-    const onOpenChange = (...args) => {
-      // console.log(args)
-      this.setState({ open: !this.state.open })
+    const showModal = key => (e) => {
+      e.preventDefault() // 修复 Android 上点击穿透
+      this.setState({
+        [key]: true
+      })
     }
-    const sidebar = (<List>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i, index) => {
-        if (index === 0) {
-          return (<List.Item
-            key={index}
-            thumb='https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png'
-            multipleLine
-          >Category</List.Item>)
-        }
-        return (<List.Item
-          key={index}
-          thumb='https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png'
-        >Category{index}</List.Item>)
-      })}
-    </List>)
+    const onClose = key => () => {
+      this.setState({
+        [key]: false
+      })
+    }
 
     return (
       <div className='product-page'>
-        <Button onClick={this.showModal('modal2')}>popup</Button>
-        <WhiteSpace />
-        <Modal
-          popup
-          visible={this.state.modal2}
-          onClose={this.onClose('modal2')}
-          animationType="slide-up"
-        >
-          <List renderHeader={() => <div>委托买入</div>} className="popup-list">
-            {['股票名称', '股票代码', '买入价格'].map((i, index) => (
-              <List.Item key={index}>{i}</List.Item>
-            ))}
+        <TabBar prerenderingSiblingsNumber={0}>
+          <TabBar.Item
+            title='首页'
+            key='Home'
+            icon={<i className='iconfont icon-home' />}
+            selectedIcon={<i className='iconfont icon-homefill' />}
+            onPress={() => { this.setState({ selectedTab: 'home' }) }}
+          />
+          <TabBar.Item
+            title='购物车'
+            key='Cart'
+            icon={<i className='iconfont icon-home' />}
+            selectedIcon={<i className='iconfont icon-homefill' />}
+            selected={this.state.selectedTab === 'cart'}
+            onPress={() => { this.setState({ selectedTab: 'cart' }) }}
+          />
+        </TabBar>
+        <Button type='primary' onClick={showModal('modal2')}>购买 </Button>
+        <Modal popup visible={this.state.modal2} onClose={onClose('modal2')} animationType='slide-up'>
+          <List renderHeader={() => <div> 委托买入 </div>} className='popup-list'>
+            {['股票名称', '股票代码', '买入价格'].map((i, index) => (<List.Item key={index}>{i}</List.Item>))}
             <List.Item>
-              <Button type="primary" onClick={this.onClose('modal2')}>买入</Button>
+              <Button type='primary' onClick={onClose('modal2')}>买入 </Button>
             </List.Item>
           </List>
         </Modal>
