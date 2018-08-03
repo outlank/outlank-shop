@@ -6,3 +6,4 @@ export function addToCart (product, quantity, unitCost) {
     payload: { product, quantity, unitCost }
   }
 }
+
