@@ -1,23 +1,16 @@
 .product-page {
   height: 100vh;
-  .product-drawer {
-    position: relative;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    .am-drawer-sidebar {
-      height: 500px;
-      background-color: #fff;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      .am-list {
-        width: 300px;
-        padding: 0;
+  .product-card {
+    margin: 8px;
+    padding: 8px;
+    .product-img {
+      img {
+        width: 100%;
+        height: auto;
       }
     }
-  }
-  .product-button {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    .product-info {
+      flex: 2
+    }
   }
 }

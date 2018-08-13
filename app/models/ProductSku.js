@@ -23,6 +23,9 @@ module.exports = db.defineModel('product_sku', {
   inventory: db.INTEGER, // 库存
   minBuyNumber: db.INTEGER, // 最小购买数量
   sales: db.INTEGER, // 销售量
-  price: db.STRING, // 价格
+  costPrice: db.STRING, // 成本价
+  partnerPrice: db.STRING, // 合伙人价
+  managerPrice: db.STRING, // 店长价
+  retailPrice: db.STRING, // 零售价
   remark: db.STRING // 产品额外信息
 })

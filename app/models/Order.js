@@ -16,7 +16,15 @@ module.exports = db.defineModel('order', {
     //   key: 'id'
     // }
   },
-  address: db.STRING, // 销售量
+  productId: { // 商品ID
+    type: db.STRING
+    // references: {
+    //   model: 'product_sku',
+    //   key: 'id'
+    // }
+  },
+  number: db.INTEGER, // 商品数量
+  address: db.STRING, //
   logistics: db.STRING, // 物流信息
   freight: db.STRING, // 运费
   loss: db.STRING, // 损耗

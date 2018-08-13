@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux'
-import * as reducers from './reducers'
+import cartReducer from './reducers/cartReducer'
 
-const reducer = combineReducers(reducers)
+const reducer = combineReducers({ cartReducer })
 
 let store = createStore(reducer)
 
